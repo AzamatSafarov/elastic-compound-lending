@@ -50,13 +50,13 @@ function App({ Component, pageProps }: any) {
   // Update the document/tab title upon navigating to a new page.
   useEffect(() => {
     if (location.pathname.startsWith('/')) {
-      document.title = 'Compound | Dashboard';
+      document.title = 'Elastic Compound Lending | Dashboard';
     }
     if (location.pathname.startsWith('/markets')) {
-      document.title = 'Compound | Markets';
+      document.title = 'Elastic Compound Lending | Markets';
     }
     if (location.pathname.startsWith('/extensions')) {
-      document.title = 'Compound | Extensions';
+      document.title = 'Elastic Compound Lending | Extensions';
     }
 
     const extensionPathRegex = new RegExp('^\\/extensions\\/([a-zA-Z0-9-_]+)');
@@ -65,7 +65,7 @@ function App({ Component, pageProps }: any) {
       const [extensionId] = pathMatch.slice(1);
       const maybeExtension = allExtensions.find((extension) => extension.id === extensionId);
       if (maybeExtension) {
-        document.title = `Compound | ${maybeExtension.name}`;
+        document.title = `Elastic Compound Lending | ${maybeExtension.name}`;
       }
     }
   }, [location.pathname]);

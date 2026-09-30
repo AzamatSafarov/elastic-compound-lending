@@ -1,71 +1,105 @@
-## Getting Started
+# Elastic Compound Lending
 
-First, install the components:
+Elastic Compound Lending is a real GitHub fork of the official Compound III frontend.
 
-```sh
+- Upstream frontend: `compound-finance/webb3-frontend`
+- Fork: `AzamatSafarov/elastic-compound-lending`
+- License: GPL-3.0
+- Purpose: lending interface foundation for the Elastic DeFi product line
+
+This repository intentionally keeps the Compound architecture instead of rebuilding the lending UI from scratch.
+
+## What this is
+
+This is a Compound III frontend fork. It contains the production-style frontend architecture used by the Compound III app:
+
+- wallet connection;
+- supported network configuration;
+- Compound market views;
+- supply / borrow interface flows;
+- transaction history integration;
+- governance / extension surfaces;
+- V3 API integration points.
+
+## Backend dependency
+
+The frontend expects a Compound V3 API backend via:
+
+```env
+VITE_V3_API_HOST=...
+```
+
+The matching backend has also been forked separately:
+
+```text
+https://github.com/AzamatSafarov/elastic-compound-backend-api
+```
+
+Upstream backend:
+
+```text
+https://github.com/compound-finance/webb3-backend-api
+```
+
+## Current status
+
+| Area | Status |
+|---|---|
+| GitHub fork | Done |
+| Upstream | `compound-finance/webb3-frontend` |
+| License | GPL-3.0 |
+| Local install | Verified |
+| Production build | Verified |
+| Compound V3 API backend | Forked separately |
+| ZKsync support | Not enabled yet |
+| Custom Compound market on ZKsync | Not deployed |
+
+## Important limitation
+
+This frontend only becomes a real ZKsync lending product if a compatible Compound III / Comet market exists on ZKsync or is deployed and audited.
+
+Without a ZKsync Comet market, the fork can still be used as the lending frontend foundation, but it cannot create real Compound lending positions on ZKsync by itself.
+
+## Required environment variables
+
+```env
+VITE_V3_API_HOST=https://your-compound-v3-api.example
+VITE_V3_RPC_PROVIDER_HOST=https://your-rpc-proxy.example
+VITE_V3_WALLET_CONNECT_PROJECT_ID=your_walletconnect_project_id
+```
+
+`VITE_V3_API_HOST` is required for markets, rewards, summaries, account history, and other backend-powered data.
+
+`VITE_V3_RPC_PROVIDER_HOST` is required for blockchain RPC reads/writes through the configured networks.
+
+`VITE_V3_WALLET_CONNECT_PROJECT_ID` is required only if WalletConnect support is enabled.
+
+## Development
+
+Install dependencies:
+
+```bash
 yarn install
 ```
 
-Then, to run the development server:
+Run locally:
 
 ```bash
-yarn run dev
+yarn dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173) with your browser to see the result.
+Build:
 
-You can start editing the page by modifying `src/Home.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://reactrouter.com/) can be accessed on [http://localhost:5173/markets](http://localhost:5173/markets). This endpoint can be edited in `src/Markets.tsx`.
-
-## Development Environment
-
-Developers contributing to this repo are highly encouraged to use [VS Code](https://code.visualstudio.com).
-
-You are free to use you own preferred IDE as well and if you do we ask that you add instructions for adding Typescript types, Prettier formatting and ESLinting to your editor environment as all 3 are required and checked on any PRs.
-
-### VS Code
-
-First go and download vs code here: [VS Code](https://code.visualstudio.com).
-
-Once you have downloaded then you can open the webb3 repo. The repo has a folder called `.vscode` with some configuration files.
-`settings.json` - Workspace settings and is used to tell Pretter which files to format. Formatting is perfomed on save.
-`extensions.json` - Recommended extensions. Here Prettier and ESlint are both specified and integrate nicely within VSCode.
-
-Note: `.vscode/settings.json` contain workspace settings, but you are free to also specify more of your own User settings so long as they don't conflict with the workplace settings we have specifed.
-
-Install both Prettier and ESLint through VS Code extensions. (They should show up under Extensions > Recommended)
-
-## Required Environment Variables
-
-The application requires the following environment variables to be set in order to function properly:
-
-- `VITE_V3_API_HOST` - The host endpoint used for the v3 api. The Dashboard will function without the api but the Markets page and Rewards balances are rendered from data given by the v3 api.
-- `VITE_V3_RPC_PROVIDER_HOST` - An RPC host provider. This app was designed to work with the v3 api Node Proxy but any RPC provider should work. You should make sure your RPC provider supports all of the supported networks to function properly.
-- `VITE_V3_WALLET_CONNECT_PROJECT_ID` - A Wallet Connect project id used if you want the app to support Wallet Connect.
-
-## Extensions
-
-If you want to develop extensions, please run the extension locally (e.g. on http://localhost:5183) and then set the environment variable `VITE_{EXTENSION}_SOURCE`, e.g.:
-
-```
-VITE_COMET_MIGRATOR_SOURCE=http://localhost:5183 yarn dev
+```bash
+yarn build
 ```
 
-The app will use that address instead of the configured address to load the app `comet_migrator`.
+Preview production build:
 
-You can also use:
-
-```
-yarn dev --mode playground
+```bash
+yarn preview
 ```
 
-In playground mode, mainnet will point to `http://localhost:8545`, and all extensions will point to `http://localhost:8545/embedded.html`.
+## Fork policy
 
-You can also use:
-
-```
-VITE_EXTRA_EXTENSIONS=cool VITE_COOL_SOURCE=... yarn dev
-```
-
-This will add a new blank extension named `cool`.
+This repository is a GPL-3.0 derivative of the official Compound III frontend. Keep GPL-3.0 notices, upstream attribution, and source availability intact.

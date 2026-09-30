@@ -30,7 +30,7 @@ export const config = createConfig({
     injected(),
     walletConnect({ projectId: WALLECT_CONNECT_PROJECT_ID }),
     coinbaseWallet({
-      appName: 'Compound III',
+      appName: 'Elastic Compound Lending',
     }),
     ledgerConnector(),
   ],

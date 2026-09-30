@@ -42,3 +42,4 @@ yarn-error.log*
 src/helpers/cache
 src/helpers/sleuth/out/CometQuery.sol/*
 !src/helpers/sleuth/out/CometQuery.sol/CometQuery.json
+.vercel
